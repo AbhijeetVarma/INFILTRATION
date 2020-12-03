@@ -24,15 +24,17 @@ var floor2
 var mnbI
 var money = 0
 var rand
-var key,keyI
+var keys,keyI
 var rand2
 var NO =0
 var YES =1
 var Play = 0
-var OrerW = 1
+var OverW = 1
 var OverL = 1
 var keyPoss = NO
 var gameMode = Play
+var clockyThing = 50
+var door
 
 function  preload(){
      playerI = loadImage("theif.png")
@@ -367,11 +369,13 @@ coin20.scale=0.02
 coin20.visible = false
 
 
-key = createSprite(-100,30)
-key.addImage(keyI)
-key.scale=0.1
-key.visible=false
+keys = createSprite(650,50)
+keys.addImage(keyI)
+keys.scale=0.1
+keys.visible=false
 
+ door = createSprite(50,350,10,200)
+door.visible = false
 
 }
 
@@ -382,49 +386,70 @@ key.visible=false
 
 
 function draw(){
-    
-    
-    //movement
-    if(keyDown("w")){
-     player.y = player.y-10
-    }
-    if(keyDown("d")){
-        player.x = player.x+10
-    }
-    if(keyDown("s")){
-        player.y = player.y+10
-       }
-       if(keyDown("a")){
-           player.x = player.x-10
-       }
-       if(player.isTouching(stair) && floorState===0){
-        floorState = 1
-        player.x = 1100
-        player.y = 600
-        console.log("ayyy!")
+    background(0)
+    if(gameMode === Play){
+//movement
+if(keyDown("w")){
+    player.y = player.y-10
    }
-   if(player.isTouching(stair) && floorState===1){
-    floorState =0
-    player.x = 1100
-        player.y = 600
+   if(keyDown("d")){
+       player.x = player.x+10
+   }
+   if(keyDown("s")){
+       player.y = player.y+10
+      }
+      if(keyDown("a")){
+          player.x = player.x-10
+      }
+      if(player.isTouching(stair) && floorState===0){
+       floorState = 1
+       player.x = 1100
+       player.y = 600
+       console.log("ayyy!")
+  }
+  if(player.isTouching(stair) && floorState===1){
+   floorState =0
+   player.x = 1100
+       player.y = 600
 
 }
 if(floorState === 0){
-    FirstFloor()
+   FirstFloor()
 }
 if(floorState === 1){
-    SecondFloor()
+   SecondFloor()
+}
+if(clockyThing>0 && frameCount%1 === 0){
+   clockyThing = Math.round(clockyThing-1)
 }
 
-
-
+if(player.isTouching(door) && keyPoss === YES && clockyThing>0){
+  gameMode = OverW
+}
+if(clockyThing === 0){
+    gameMode = OverL
+    }
     drawSprites()
+    }
+    
+     if(gameMode === OverL){
+        text("YOU Lost:(",350,350)
+    }
+    
+
+    if(gameMode === OverW){
+        text("YOU WON",350,350)
+    }
+    
 
     textSize(50)
     fill("gold")
     imageMode(CENTER)
     image(coinI,1150,65,50,50)
     text(money,1180,80)
+
+
+    text("timer: "+clockyThing,1050,165)
     
 }
 
@@ -606,7 +631,7 @@ switch(rand){
                  
              }
              break
-             case 2:if(player.isTouching(coin4) && keyDown("e")){
+             case 2:if(player.isTouching(coin8) && keyDown("e")){
                 console.log("case2")
                 coin8.visible = true
                 coin8.velocityX = 10
@@ -964,40 +989,42 @@ switch(rand){
                         money = money+10
                        
                     }
+                    keyLoca()
 
+ if(player.isTouching(keys) && keyDown("r") && keyPoss === NO){
+     keys.visible=true
+    keys.x = 50
+    keys.y=50
+     keyPoss = YES  
+    console.log("ayeyeyeyee")
+     
+ }
 
-if(player.isTouching(key) && keyDown("e")){
-    key.visible=true
-    key.x = 50
-    key.y=50
-    keyPoss = YES       
-
-}
-keyLoca()
  
 }
 
 
 function keyLoca(){
     switch(rand2){
-        case 1: key.x=50
+        case 1: keys.x=50
                 
             break;
-        case 2:key.x=370
+        case 2:keys.x=370
                
             break ;
-        case 3:key.x=480
+        case 3:keys.x=480
                
                 break;
-        case 4:key.x=820
+        case 4:keys.x=820
                 
                 break ;
-        case 5:key.x=940
+        case 5:keys.x=940
                
             break;
-        case 6:key.x=1040
+        case 6:keys.x=1040
        
             break ;    
-            
+           default:break; 
     }
+    console.log(rand2)
 }
