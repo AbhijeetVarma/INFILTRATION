@@ -21,10 +21,18 @@ var wall1,wall2 , wall3 , wall4,wall5,wall6,wall7,wall8,wall9,wall10,wall11,wall
 var floorState = 0
 var floor1
 var floor2
-
+var mnbI
 var money = 0
-
-
+var rand
+var key,keyI
+var rand2
+var NO =0
+var YES =1
+var Play = 0
+var OrerW = 1
+var OverL = 1
+var keyPoss = NO
+var gameMode = Play
 
 function  preload(){
      playerI = loadImage("theif.png")
@@ -37,6 +45,8 @@ function  preload(){
      standI = loadImage("nightStand.png")
      stairI=loadImage("stairs.png")
      coinI = loadImage("coin.png")
+     mnbI = loadImage("mnb.png")
+     keyI = loadImage("key.png")
 }
 
 function setup(){
@@ -87,8 +97,11 @@ wall1 = createSprite(90,180,230,20)
     wall8.shapeColor = "brown"
     wall9.shapeColor = "brown"
     wall10.shapeColor = "brown"
-
-
+    
+    
+    rand = Math.round(random(1,2))
+     console.log(rand)
+     rand2 = Math.round(random(1,6))
 
 
     sofa = createSprite(460,320,100,100)
@@ -350,16 +363,23 @@ coin19.visible = false
 
 coin20 = createSprite(50,30)
 coin20.addImage(coinI)
-coin10.scale=0.02
-coin10.visible = false
+coin20.scale=0.02
+coin20.visible = false
 
 
-
-
-
+key = createSprite(-100,30)
+key.addImage(keyI)
+key.scale=0.1
+key.visible=false
 
 
 }
+
+
+
+
+
+
 
 function draw(){
     
@@ -397,14 +417,20 @@ if(floorState === 1){
 }
 
 
-console.log(floorState)
 
     drawSprites()
 
-    textSize(7)
-    text(money,1200,100)
-
+    textSize(50)
+    fill("gold")
+    imageMode(CENTER)
+    image(coinI,1150,65,50,50)
+    text(money,1180,80)
+    
 }
+
+
+
+
 
 function FirstFloor(){
 
@@ -423,96 +449,251 @@ floor2.setVisibleEach(false)
     player.collide(wall10)
     player.collide(edges)
 
-
-if(player.isTouching(coin1) && keyDown("e")){
-   coin1.visible = true
-   coin1.velocityX = 10
-   coin1.velocityY = -7
-   if(coin1.x>1300 ){
-       coin1.destroy()
-   }
-}
-
-if(player.isTouching(coin2) && keyDown("e")){
+switch(rand){
+case 1:if(player.isTouching(coin1) && keyDown("e")){
+    console.log("case1")
+    coin1.visible = true
+    coin1.velocityX = 10
+    coin1.velocityY = -7
+   
+    
+     
+ }
+ break
+ case 2:if(player.isTouching(coin2) && keyDown("e")){
+    console.log("case2")
     coin2.visible = true
     coin2.velocityX = 10
     coin2.velocityY = -3
-    if(coin2.x>1300 ){
-        coin2.destroy()
-    }
+   
+    
+     
  }
+ 
+ break
+ default : break;
 
- if(player.isTouching(coin3) && keyDown("e")){
-    coin3.visible = true
-    coin3.velocityX = 10
-    //coin3.velocityY = -7
-    if(coin3.x>1300 ){
+}
+
+if(coin1.x === 1300 ){
+    coin1.destroy()
+    //money = money+10
+     
+}
+if(coin1.x === 1290 ){
+    
+    money = money+10
+   
+}
+
+if(coin2.x === 1300 ){
+    coin2.destroy()
+    //money = money+10
+     
+}
+if(coin2.x === 1290 ){
+    
+    money = money+10
+   
+}
+
+switch(rand){
+    case 1:if(player.isTouching(coin3) && keyDown("e")){
+        console.log("case1")
+        coin3.visible = true
+        coin3.velocityX = 10
+        coin3.velocityY = -7
+       
+      
+         
+     }
+     break
+     case 2:if(player.isTouching(coin4) && keyDown("e")){
+        console.log("case2")
+        coin4.visible = true
+        coin4.velocityX = 10
+        coin4.velocityY = -3
+       
+        
+         
+     }
+     
+     break
+     default : break;
+    
+    }
+    
+    if(coin3.x === 1300 ){
         coin3.destroy()
+        //money = money+10
+        
     }
- }
-
- if(player.isTouching(coin4) && keyDown("e")){
-    coin4.visible = true
-    coin4.velocityX = 10
-    //coin4.velocityY = -7
-    if(coin4.x>1300 ){
+    if(coin3.x === 1290 ){
+        
+        money = money+10
+       
+    }
+    
+    if(coin4.x === 1300 ){
         coin4.destroy()
+        //money = money+10
+         
     }
- }
+    if(coin4.x === 1290 ){
+        
+        money = money+10
+       
+    }
 
- if(player.isTouching(coin5) && keyDown("e")){
-    coin5.visible = true
-    coin5.velocityX = 10
-   // coin5.velocityY = -7
-    if(coin5.x>1300 ){
-        coin5.destroy()
-    }
- }
+    switch(rand){
+        case 1:if(player.isTouching(coin5) && keyDown("e")){
+            console.log("case1")
+            coin5.visible = true
+            coin5.velocityX = 10
+            coin5.velocityY = -7
+           
+          
+             
+         }
+         break
+         case 2:if(player.isTouching(coin6) && keyDown("e")){
+            console.log("case2")
+            coin6.visible = true
+            coin6.velocityX = 10
+            coin6.velocityY = -3
+           
+            
+             
+         }
+         
+         break
+         default : break;
+        
+        }
+        
+        if(coin5.x === 1300 ){
+            coin5.destroy()
+            //money = money+10
+             
+        }
+        if(coin5.x === 1290 ){
+            
+            money = money+10
+           
+        }
+        
+        if(coin6.x === 1300 ){
+            coin6.destroy()
+            //money = money+10
+             
+        }
+        if(coin6.x === 1290 ){
+            
+            money = money+10
+           
+        }
 
- if(player.isTouching(coin6) && keyDown("e")){
-    coin6.visible = true
-    coin6.velocityX = 10
-    //coin6.velocityY = -7
-    if(coin6.x>1300 ){
-        coin6.destroy()
-    }
- }
 
- if(player.isTouching(coin7) && keyDown("e")){
-    coin7.visible = true
-    coin7.velocityX = 10
-    //coin7.velocityY = -7
-    if(coin7.x>1300 ){
-        coin7.destroy()
-    }
- }
 
- if(player.isTouching(coin8) && keyDown("e")){
-    coin8.visible = true
-   // coin8.velocityX = 10
-    coin8.velocityY = -7
-    if(coin8.x>1300 ){
-        coin8.destroy()
-    }
- }
+        switch(rand){
+            case 1:if(player.isTouching(coin7) && keyDown("e")){
+                console.log("case1")
+                coin7.visible = true
+                coin7.velocityX = 10
+                coin7.velocityY = -7
+               
+              
+                 
+             }
+             break
+             case 2:if(player.isTouching(coin4) && keyDown("e")){
+                console.log("case2")
+                coin8.visible = true
+                coin8.velocityX = 10
+                coin8.velocityY = -3
+               
+                
+                 
+             }
+             
+             break
+             default : break;
+            
+            }
+            
+            if(coin7.x === 1300 ){
+                coin7.destroy()
+                //money = money+10
+                 
+            }
+            if(coin7.x === 1290 ){
+                
+                money = money+10
+               
+            }
+            
+            if(coin8.x === 1300 ){
+                coin8.destroy()
+                //money = money+10
+                 
+            }
+            if(coin8.x === 1290 ){
+                
+                money = money+10
+               
+            }
 
- if(player.isTouching(coin9) && keyDown("e")){
-    coin9.visible = true
-    //coin9.velocityX = 10
-    coin9.velocityY = -7
-    if(coin9.x>1300 ){
-        coin9.destroy()
-    }
- }
+ 
 
- if(player.isTouching(coin10) && keyDown("e")){
-    coin10.visible = true
-    coin10.velocityX = 10
-   // coin10.velocityY = -7
-    if(coin10.x>1300 ){
-        coin10.destroy()
-    }
- }
+
+
+            switch(rand){
+                case 1:if(player.isTouching(coin9) && keyDown("e")){
+                    console.log("case1")
+                    coin9.visible = true
+                    coin9.velocityX = 10
+                    coin9.velocityY = -7
+                   
+                  
+                     
+                 }
+                 break
+                 case 2:if(player.isTouching(coin10) && keyDown("e")){
+                    console.log("case2")
+                    coin10.visible = true
+                    coin10.velocityX = 10
+                    coin10.velocityY = -3
+                   
+                    
+                     
+                 }
+                 
+                 break
+                 default : break;
+                
+                }
+                
+                if(coin9.x === 1300 ){
+                    coin9.destroy()
+                    //money = money+10
+                     
+                }
+                if(coin9.x === 1290 ){
+                    
+                    money = money+10
+                   
+                }
+                
+                if(coin10.x === 1300 ){
+                    coin10.destroy()
+                    //money = money+10
+                     
+                }
+                if(coin10.x === 1290 ){
+                    
+                    money = money+10
+                   
+                }
 
  
  
@@ -538,97 +719,285 @@ player.collide(wall20)
 player.collide(edges)
 
 
-if(player.isTouching(coin11) && keyDown("e")){
-    coin11.visible = true
-    coin11.velocityX = 10
-    coin11.velocityY = -7
-    if(coin11.x>1300 ){
-        coin11.destroy()
+switch(rand){
+    case 1:if(player.isTouching(coin11) && keyDown("e")){
+        console.log("case1")
+        coin11.visible = true
+        coin11.velocityX = 10
+        coin11.velocityY = -7
+       
+        
+         
+     }
+     break
+     case 2:if(player.isTouching(coin12) && keyDown("e")){
+        console.log("case2")
+        coin12.visible = true
+        coin12.velocityX = 10
+        coin12.velocityY = -3
+       
+        
+         
+     }
+     
+     break
+     default : break;
+    
     }
- }
- 
- if(player.isTouching(coin12) && keyDown("e")){
-     coin12.visible = true
-     coin12.velocityX = 10
-     coin12.velocityY = -3
-     if(coin12.x>1300 ){
-         coin12.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin13) && keyDown("e")){
-     coin13.visible = true
-     coin13.velocityX = 10
-     //coin3.velocityY = -7
-     if(coin13.x>1300 ){
-         coin13.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin14) && keyDown("e")){
-     coin14.visible = true
-     coin14.velocityX = 10
-     //coin4.velocityY = -7
-     if(coin14.x>1300 ){
-         coin14.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin15) && keyDown("e")){
-     coin15.visible = true
-     coin15.velocityX = 10
-    // coin5.velocityY = -7
-     if(coin15.x>1300 ){
-         coin15.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin16) && keyDown("e")){
-     coin16.visible = true
-     coin16.velocityX = 10
-     //coin6.velocityY = -7
-     if(coin16.x>1300 ){
-         coin16.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin17) && keyDown("e")){
-     coin17.visible = true
-     coin17.velocityX = 10
-     //coin7.velocityY = -7
-     if(coin17.x>1300 ){
-         coin17.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin18) && keyDown("e")){
-     coin18.visible = true
-    // coin8.velocityX = 10
-     coin18.velocityY = -7
-     if(coin18.x>1300 ){
-         coin18.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin19) && keyDown("e")){
-     coin19.visible = true
-     //coin9.velocityX = 10
-     coin19.velocityY = -7
-     if(coin19.x>1300 ){
-         coin19.destroy()
-     }
-  }
- 
-  if(player.isTouching(coin20) && keyDown("e")){
-     coin20.visible = true
-     coin20.velocityX = 10
-    // coin10.velocityY = -7
-     if(coin20.x>1300 ){
-         coin20.destroy()
-     }
-  }
+    
+    if(coin11.x === 1300 ){
+        coin11.destroy()
+        //money = money+10
+         
+    }
+    if(coin11.x === 1290 ){
+        
+        money = money+10
+       
+    }
+    
+    if(coin12.x === 1300 ){
+        coin12.destroy()
+        //money = money+10
+         
+    }
+    if(coin12.x === 1290 ){
+        
+        money = money+10
+       
+    }
+    
+    switch(rand){
+        case 1:if(player.isTouching(coin13) && keyDown("e")){
+            console.log("case1")
+            coin13.visible = true
+            coin13.velocityX = 10
+            coin13.velocityY = -7
+           
+          
+             
+         }
+         break
+         case 2:if(player.isTouching(coin14) && keyDown("e")){
+            console.log("case2")
+            coin14.visible = true
+            coin14.velocityX = 10
+            coin14.velocityY = -3
+           
+            
+             
+         }
+         
+         break
+         default : break;
+        
+        }
+        
+        if(coin13.x === 1300 ){
+            coin13.destroy()
+            //money = money+10
+             
+        }
+        if(coin13.x === 1290 ){
+            
+            money = money+10
+           
+        }
+        
+        if(coin14.x === 1300 ){
+            coin14.destroy()
+            //money = money+10
+             
+        }
+        if(coin14.x === 1290 ){
+            
+            money = money+10
+           
+        }
+    
+        switch(rand){
+            case 1:if(player.isTouching(coin15) && keyDown("e")){
+                console.log("case1")
+                coin15.visible = true
+                coin15.velocityX = 10
+                coin15.velocityY = -7
+               
+              
+                 
+             }
+             break
+             case 2:if(player.isTouching(coin16) && keyDown("e")){
+                console.log("case2")
+                coin16.visible = true
+                coin16.velocityX = 10
+                coin16.velocityY = -3
+               
+                
+                 
+             }
+             
+             break
+             default : break;
+            
+            }
+            
+            if(coin15.x === 1300 ){
+                coin15.destroy()
+                //money = money+10
+                 
+            }
+            if(coin15.x === 1290 ){
+                
+                money = money+10
+               
+            }
+            
+            if(coin16.x === 1300 ){
+                coin16.destroy()
+                //money = money+10
+                 
+            }
+            if(coin16.x === 1290 ){
+                
+                money = money+10
+               
+            }
+    
+    
+    
+            switch(rand){
+                case 1:if(player.isTouching(coin17) && keyDown("e")){
+                    console.log("case1")
+                    coin17.visible = true
+                    coin17.velocityX = 10
+                    coin17.velocityY = -7
+                   
+                  
+                     
+                 }
+                 break
+                 case 2:if(player.isTouching(coin18) && keyDown("e")){
+                    console.log("case2")
+                    coin18.visible = true
+                    coin18.velocityX = 10
+                    coin18.velocityY = -3
+                   
+                    
+                     
+                 }
+                 
+                 break
+                 default : break;
+                
+                }
+                
+                if(coin17.x === 1300 ){
+                    coin17.destroy()
+                    //money = money+10
+                     
+                }
+                if(coin17.x === 1290 ){
+                    
+                    money = money+10
+                   
+                }
+                
+                if(coin18.x === 1300 ){
+                    coin18.destroy()
+                    //money = money+10
+                     
+                }
+                if(coin18.x === 1290 ){
+                    
+                    money = money+10
+                   
+                }
+    
+     
+    
+    
+    
+                switch(rand){
+                    case 1:if(player.isTouching(coin19) && keyDown("e")){
+                        console.log("case1")
+                        coin19.visible = true
+                        coin19.velocityX = 10
+                        coin19.velocityY = -7
+                       
+                      
+                         
+                     }
+                     break
+                     case 2:if(player.isTouching(coin20) && keyDown("e")){
+                        console.log("case2")
+                        coin20.visible = true
+                        coin20.velocityX = 10
+                        coin20.velocityY = -3
+                       
+                        
+                         
+                     }
+                     
+                     break
+                     default : break;
+                    
+                    }
+                    
+                    if(coin19.x === 1300 ){
+                        coin19.destroy()
+                        //money = money+10
+                         
+                    }
+                    if(coin19.x === 1290 ){
+                        
+                        money = money+10
+                       
+                    }
+                    
+                    if(coin20.x === 1300 ){
+                        coin20.destroy()
+                        //money = money+10
+                         
+                    }
+                    if(coin20.x === 1290 ){
+                        
+                        money = money+10
+                       
+                    }
 
 
+if(player.isTouching(key) && keyDown("e")){
+    key.visible=true
+    key.x = 50
+    key.y=50
+    keyPoss = YES       
 
+}
+keyLoca()
  
+}
+
+
+function keyLoca(){
+    switch(rand2){
+        case 1: key.x=50
+                
+            break;
+        case 2:key.x=370
+               
+            break ;
+        case 3:key.x=480
+               
+                break;
+        case 4:key.x=820
+                
+                break ;
+        case 5:key.x=940
+               
+            break;
+        case 6:key.x=1040
+       
+            break ;    
+            
+    }
 }
