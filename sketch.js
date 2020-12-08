@@ -30,10 +30,10 @@ var NO =0
 var YES =1
 var Play = 0
 var OverW = 1
-var OverL = 1
+var OverL = 2
 var keyPoss = NO
 var gameMode = Play
-var clockyThing = 50
+var clockyThing = 60
 var door
 
 function  preload(){
@@ -419,7 +419,7 @@ if(floorState === 0){
 if(floorState === 1){
    SecondFloor()
 }
-if(clockyThing>0 && frameCount%1 === 0){
+if(clockyThing>0 && frameCount%40 === 0){
    clockyThing = Math.round(clockyThing-1)
 }
 
